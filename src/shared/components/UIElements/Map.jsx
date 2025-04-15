@@ -10,13 +10,14 @@ const Map = (props) => {
   const { center, zoom } = props;
 
   useEffect(() => {
+    if (!mapRef.current || !window.google || !window.google.maps) return;
+
     const map = new window.google.maps.Map(mapRef.current, {
       center: center,
       zoom: zoom,
-      mapId: "DEMO_MAP_ID",
     });
 
-    new window.google.maps.marker.AdvancedMarkerElement({
+    const marker = new window.google.maps.Marker({
       position: center,
       map: map,
     });
